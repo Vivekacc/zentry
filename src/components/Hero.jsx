@@ -17,7 +17,7 @@ const Hero = () => {
     const [isLoading,setIsLoading]= useState(true);
     const [loadedViedo,setLoadedVideo]= useState(0);
 
-    const totalVideo = 4;
+    const totalVideo = 8;
 
     const nextVdRef = useRef(null)
 
@@ -26,9 +26,12 @@ const Hero = () => {
     
     }
 
-    const upcomingVideo = (currentIndex % totalVideo) + 1;
+    const upcomingVideo = (currentIndex % totalVideo) + 2;
+    const currentVideo = currentIndex ;
+    const newSrc = (currentIndex === totalVideo) - 1 ? 1 : currentIndex;
+
     useEffect(()=>{
-        if(loadedViedo === totalVideo - 1){
+        if(loadedViedo === totalVideo - 8){
             setIsLoading(false)
         }
     },[loadedViedo])
@@ -115,14 +118,14 @@ const Hero = () => {
                     </div>
                 </div>
                 <video  ref={nextVdRef}
-                        src={getVideoSrc(currentIndex)}
+                        src={getVideoSrc(currentVideo)}
                         loop
                         muted
                         id="next-video"
                         className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
                         onLoadedData={handelVideoLoad}
                 />
-                <video  src={getVideoSrc(currentIndex === totalVideo - 1 ? 1 :currentIndex)}
+                <video  src={getVideoSrc(newSrc)}
                         autoPlay
                         loop
                         muted
